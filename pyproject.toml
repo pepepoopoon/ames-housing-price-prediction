@@ -23,6 +23,7 @@ ames-generate-smoke = "ames_housing.generate_smoke_data:main"
 ames-train = "ames_housing.train:main"
 ames-evaluate = "ames_housing.evaluate:main"
 ames-predict = "ames_housing.predict:main"
+ames-experiment = "ames_housing.experiments:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
