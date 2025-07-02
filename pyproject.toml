@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ames-housing-price-prediction"
+version = "0.1.0"
+description = "Leakage-safe Ames housing price regression"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "joblib==1.5.3",
+  "numpy==2.4.6",
+  "pandas==3.0.3",
+  "scikit-learn==1.9.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2", "ruff==0.15.6"]
+
+[project.scripts]
+ames-generate-smoke = "ames_housing.generate_smoke_data:main"
+ames-train = "ames_housing.train:main"
+ames-evaluate = "ames_housing.evaluate:main"
+ames-predict = "ames_housing.predict:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["ames_housing"]
