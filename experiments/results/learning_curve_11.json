@@ -1,0 +1,210 @@
+{
+  "baseline_comparison": {
+    "baseline": "dummy_median",
+    "candidate": "ridge_log_target",
+    "test_mae_reduction": 41646.81163019538,
+    "test_mae_reduction_pct": 66.94091035204744
+  },
+  "config": {
+    "duplicate_rate": 0.0,
+    "label": "learning-curve-360",
+    "learning_fractions": [
+      0.3,
+      0.45,
+      0.6,
+      0.8,
+      1.0
+    ],
+    "learning_rate": 0.05,
+    "max_depth": 3,
+    "min_samples_leaf": 2,
+    "missing_categorical_rate": 0.0,
+    "missing_numeric_rate": 0.0,
+    "model": "ridge_log_target",
+    "n_estimators": 80,
+    "repeat_seeds": [],
+    "ridge_alpha": 5.0,
+    "rows": 360,
+    "seed": 1111,
+    "stress": "none",
+    "stress_level": 0.1,
+    "target_noise_scale": 0.0,
+    "train_fraction": 1.0
+  },
+  "data_quality_diagnostics": {
+    "categorical_missing_added": 0,
+    "duplicate_rows_added": 0,
+    "numeric_missing_added": 0,
+    "rows_after": 216,
+    "rows_before": 216,
+    "target_noise_scale": 0.0
+  },
+  "learning_curve": [
+    {
+      "fraction": 0.3,
+      "train_rows": 65,
+      "validation_mae": 23466.3567182522,
+      "validation_r2": 0.8469428787875664,
+      "validation_rmse": 29155.349755408603
+    },
+    {
+      "fraction": 0.45,
+      "train_rows": 97,
+      "validation_mae": 21541.243144761185,
+      "validation_r2": 0.8720440717893951,
+      "validation_rmse": 26657.639539179447
+    },
+    {
+      "fraction": 0.6,
+      "train_rows": 130,
+      "validation_mae": 21865.97024461646,
+      "validation_r2": 0.8690745702446044,
+      "validation_rmse": 26965.190293895263
+    },
+    {
+      "fraction": 0.8,
+      "train_rows": 173,
+      "validation_mae": 20310.129790418192,
+      "validation_r2": 0.8860872460431789,
+      "validation_rmse": 25152.29749688078
+    },
+    {
+      "fraction": 1.0,
+      "train_rows": 216,
+      "validation_mae": 20264.560575382064,
+      "validation_r2": 0.8843106151267528,
+      "validation_rmse": 25347.681493377542
+    }
+  ],
+  "models": {
+    "dummy_median": {
+      "test": {
+        "mae": 62214.289305555554,
+        "r2": -0.06758820304624735,
+        "rmse": 74920.01689871079
+      },
+      "validation": {
+        "mae": 60775.396388888876,
+        "r2": -0.0009046509852659312,
+        "rmse": 74556.89946138646
+      }
+    },
+    "ridge_log_target": {
+      "test": {
+        "mae": 20567.477675360176,
+        "r2": 0.8760134342548025,
+        "rmse": 25531.90965460199
+      },
+      "validation": {
+        "mae": 20264.560575382064,
+        "r2": 0.8843106151267528,
+        "rmse": 25347.681493377542
+      }
+    }
+  },
+  "sample_sizes": {
+    "full": 360,
+    "test": 72,
+    "train": 216,
+    "train_after_quality": 216,
+    "validation": 72
+  },
+  "schema_version": 1,
+  "seed_stability": {
+    "runs": [],
+    "summary": {
+      "run_count": 0
+    }
+  },
+  "segment_diagnostics": {
+    "construction_era": {
+      "1946_1979": {
+        "count": 18,
+        "mae": 20974.328789412637,
+        "mean_residual": -4243.011743878949,
+        "rmse": 26389.654165747957
+      },
+      "1980_1999": {
+        "count": 15,
+        "mae": 19087.50269502039,
+        "mean_residual": 728.2079725984232,
+        "rmse": 21538.34601725206
+      },
+      "post_1999": {
+        "count": 5,
+        "mae": 19644.74010251872,
+        "mean_residual": -8892.714089555084,
+        "rmse": 21943.581880136775
+      },
+      "pre_1946": {
+        "count": 34,
+        "mae": 21140.71274937076,
+        "mean_residual": 2231.78676739681,
+        "rmse": 27134.570500378333
+      }
+    },
+    "neighborhood": {
+      "CollgCr": {
+        "count": 12,
+        "mae": 16503.12854634113,
+        "mean_residual": 8890.305868677237,
+        "rmse": 20852.880759302927
+      },
+      "Edwards": {
+        "count": 17,
+        "mae": 26043.472508547115,
+        "mean_residual": -664.7079534903648,
+        "rmse": 30343.423005061937
+      },
+      "NAmes": {
+        "count": 9,
+        "mae": 24060.939495863815,
+        "mean_residual": -12619.875826334894,
+        "rmse": 30831.495022326537
+      },
+      "NridgHt": {
+        "count": 23,
+        "mae": 17388.68861092445,
+        "mean_residual": -1205.1005096835015,
+        "rmse": 22183.12014869584
+      },
+      "OldTown": {
+        "count": 11,
+        "mae": 20326.683991863767,
+        "mean_residual": 1079.8769807104836,
+        "rmse": 23724.7835148939
+      }
+    },
+    "quality_band": {
+      "basic": {
+        "count": 33,
+        "mae": 18772.8273503367,
+        "mean_residual": -3491.3276139303266,
+        "rmse": 23638.707838154784
+      },
+      "premium": {
+        "count": 24,
+        "mae": 19722.878195487498,
+        "mean_residual": -280.77710756419884,
+        "rmse": 24045.031046118715
+      },
+      "standard": {
+        "count": 15,
+        "mae": 25867.067558208106,
+        "mean_residual": 5861.236645607528,
+        "rmse": 31218.904912740454
+      }
+    }
+  },
+  "stress_diagnostics": {
+    "level": 0.1,
+    "mae_change": 0.0,
+    "metrics": {
+      "mae": 20567.477675360176,
+      "r2": 0.8760134342548025,
+      "rmse": 25531.90965460199
+    },
+    "rmse_change": 0.0,
+    "scenario": "none"
+  }
+}
