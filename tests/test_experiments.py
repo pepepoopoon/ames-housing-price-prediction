@@ -6,8 +6,10 @@ from ames_housing.data import split_data
 from ames_housing.experiments import (
     ExperimentConfig,
     apply_stress,
+    degrade_training_data,
     main,
     measure_learning_curve,
+    measure_seed_stability,
     run_experiment,
     segment_diagnostics,
 )
@@ -21,7 +23,13 @@ def test_experiment_is_reproducible() -> None:
     second = run_experiment(config)
 
     assert first == second
-    assert first["sample_sizes"] == {"full": 100, "train": 48, "validation": 20, "test": 20}
+    assert first["sample_sizes"] == {
+        "full": 100,
+        "train": 48,
+        "train_after_quality": 48,
+        "validation": 20,
+        "test": 20,
+    }
     assert first["models"]["ridge_log_target"]["test"]["mae"] > 0
 
 
@@ -88,7 +96,77 @@ def test_learning_curve_uses_increasing_train_samples() -> None:
 
     frame = generate_smoke_frame(100)
     train, validation, _ = split_data(frame, seed=43)
-    assert measure_learning_curve(train, validation, 43, ()) == []
+    empty_config = ExperimentConfig(label="empty-curve", seed=43, rows=100, train_fraction=1.0)
+    assert measure_learning_curve(train, validation, empty_config) == []
+
+
+def test_seed_stability_repeats_the_full_pipeline() -> None:
+    stability_config = ExperimentConfig(
+        label="stable", seed=101, rows=100, train_fraction=0.75, repeat_seeds=(101, 103, 107)
+    )
+    stability = measure_seed_stability(stability_config)
+
+    assert [run["seed"] for run in stability["runs"]] == [101, 103, 107]
+    assert stability["summary"]["run_count"] == 3
+    assert stability["summary"]["mae_min"] <= stability["summary"]["mae_mean"]
+    assert stability["summary"]["mae_mean"] <= stability["summary"]["mae_max"]
+
+    result = run_experiment(
+        ExperimentConfig(
+            label="seeds",
+            seed=47,
+            rows=100,
+            train_fraction=1.0,
+            repeat_seeds=(109, 113),
+        )
+    )
+    assert result["seed_stability"]["summary"]["run_count"] == 2
+
+
+def test_hyperparameters_select_the_requested_model() -> None:
+    config = ExperimentConfig(
+        label="small-forest",
+        seed=53,
+        rows=100,
+        train_fraction=1.0,
+        model="random_forest",
+        n_estimators=12,
+        max_depth=2,
+        min_samples_leaf=3,
+    )
+
+    result = run_experiment(config)
+
+    assert set(result["models"]) == {"dummy_median", "random_forest"}
+    assert result["baseline_comparison"]["candidate"] == "random_forest"
+    assert result["config"]["n_estimators"] == 12
+    assert result["models"]["random_forest"]["test"]["mae"] > 0
+
+
+def test_data_quality_scenarios_report_realized_defects() -> None:
+    frame = generate_smoke_frame(100).head(60)
+    config = ExperimentConfig(
+        label="quality",
+        seed=59,
+        rows=100,
+        train_fraction=1.0,
+        missing_numeric_rate=0.1,
+        missing_categorical_rate=0.15,
+        duplicate_rate=0.2,
+        target_noise_scale=0.05,
+    )
+
+    degraded, diagnostics = degrade_training_data(frame, config, seed=2_059)
+
+    assert len(degraded) == 72
+    assert diagnostics["duplicate_rows_added"] == 12
+    assert diagnostics["numeric_missing_added"] > 0
+    assert diagnostics["categorical_missing_added"] > 0
+    assert not degraded["SalePrice"].equals(frame["SalePrice"])
+
+    result = run_experiment(config)
+    assert result["data_quality_diagnostics"]["rows_after"] > result["sample_sizes"]["train"]
+    assert result["models"]["ridge_log_target"]["test"]["mae"] > 0
 
 
 def test_experiment_cli_writes_json(tmp_path) -> None:
