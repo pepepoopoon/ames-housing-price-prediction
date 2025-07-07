@@ -1,0 +1,168 @@
+{
+  "baseline_comparison": {
+    "baseline": "dummy_median",
+    "candidate": "ridge_log_target",
+    "test_mae_reduction": 36022.45472355725,
+    "test_mae_reduction_pct": 60.928118947888784
+  },
+  "config": {
+    "duplicate_rate": 0.0,
+    "label": "ridge-alpha-50",
+    "learning_fractions": [],
+    "learning_rate": 0.05,
+    "max_depth": 3,
+    "min_samples_leaf": 2,
+    "missing_categorical_rate": 0.0,
+    "missing_numeric_rate": 0.0,
+    "model": "ridge_log_target",
+    "n_estimators": 80,
+    "repeat_seeds": [],
+    "ridge_alpha": 50.0,
+    "rows": 380,
+    "seed": 3244,
+    "stress": "none",
+    "stress_level": 0.1,
+    "target_noise_scale": 0.0,
+    "train_fraction": 1.0
+  },
+  "data_quality_diagnostics": {
+    "categorical_missing_added": 0,
+    "duplicate_rows_added": 0,
+    "numeric_missing_added": 0,
+    "rows_after": 228,
+    "rows_before": 228,
+    "target_noise_scale": 0.0
+  },
+  "learning_curve": [],
+  "models": {
+    "dummy_median": {
+      "test": {
+        "mae": 59122.87355263159,
+        "r2": -0.04569835488361984,
+        "rmse": 72730.12069114992
+      },
+      "validation": {
+        "mae": 62982.43578947366,
+        "r2": -0.03476236465197213,
+        "rmse": 75623.07435606403
+      }
+    },
+    "ridge_log_target": {
+      "test": {
+        "mae": 23100.418829074333,
+        "r2": 0.8340300160485075,
+        "rmse": 28975.16193904708
+      },
+      "validation": {
+        "mae": 26907.192997018203,
+        "r2": 0.8144087319808857,
+        "rmse": 32026.7438461084
+      }
+    }
+  },
+  "sample_sizes": {
+    "full": 380,
+    "test": 76,
+    "train": 228,
+    "train_after_quality": 228,
+    "validation": 76
+  },
+  "schema_version": 1,
+  "seed_stability": {
+    "runs": [],
+    "summary": {
+      "run_count": 0
+    }
+  },
+  "segment_diagnostics": {
+    "construction_era": {
+      "1946_1979": {
+        "count": 21,
+        "mae": 24594.374126149603,
+        "mean_residual": 1481.8700697498598,
+        "rmse": 30099.95979289474
+      },
+      "1980_1999": {
+        "count": 10,
+        "mae": 13400.976824788484,
+        "mean_residual": 7659.776265527811,
+        "rmse": 16372.146160377133
+      },
+      "post_1999": {
+        "count": 8,
+        "mae": 19578.987729403547,
+        "mean_residual": -3499.446930231912,
+        "rmse": 24448.88461849611
+      },
+      "pre_1946": {
+        "count": 37,
+        "mae": 25635.359575064715,
+        "mean_residual": -7902.273363993756,
+        "rmse": 31758.355432630993
+      }
+    },
+    "neighborhood": {
+      "CollgCr": {
+        "count": 12,
+        "mae": 21445.7535491327,
+        "mean_residual": -320.2230629127395,
+        "rmse": 26802.266804878276
+      },
+      "Edwards": {
+        "count": 21,
+        "mae": 23110.14502493465,
+        "mean_residual": -14624.7067228664,
+        "rmse": 27101.165991409744
+      },
+      "NAmes": {
+        "count": 20,
+        "mae": 21966.15783838781,
+        "mean_residual": -4821.681076664276,
+        "rmse": 28067.811212734036
+      },
+      "NridgHt": {
+        "count": 16,
+        "mae": 26821.84667024388,
+        "mean_residual": 20727.03573165305,
+        "rmse": 33995.44905777987
+      },
+      "OldTown": {
+        "count": 7,
+        "mae": 20642.434200681575,
+        "mean_residual": -19557.155432516447,
+        "rmse": 28069.291944089124
+      }
+    },
+    "quality_band": {
+      "basic": {
+        "count": 32,
+        "mae": 25926.175073261184,
+        "mean_residual": -8238.726951058456,
+        "rmse": 31638.366816837708
+      },
+      "premium": {
+        "count": 22,
+        "mae": 17933.280179169375,
+        "mean_residual": 1580.1158425315516,
+        "rmse": 22373.85155905769
+      },
+      "standard": {
+        "count": 22,
+        "mae": 24157.366578343874,
+        "mean_residual": 737.0026412989696,
+        "rmse": 30720.17209665549
+      }
+    }
+  },
+  "stress_diagnostics": {
+    "level": 0.1,
+    "mae_change": 0.0,
+    "metrics": {
+      "mae": 23100.418829074333,
+      "r2": 0.8340300160485075,
+      "rmse": 28975.16193904708
+    },
+    "rmse_change": 0.0,
+    "scenario": "none"
+  }
+}
